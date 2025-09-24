@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+waitress
+PyJWT
+Werkzeug
+Pillow
+easyocr
+openpyxl
+reportlab
+typing-extensions
+pydantic[email]
+transformers
+accelerate

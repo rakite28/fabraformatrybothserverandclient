@@ -1,0 +1,29 @@
+{
+    "SERVER_SHARE_DIR": "server_share",
+    "TEMPLATE_PATH": "FDM.xlsx",
+    "cells": [
+        "D4",
+        "D9",
+        "D10",
+        "D11",
+        "D12",
+        "D13"
+    ],
+    "headers": [
+        "Sr. No",
+        "Date",
+        "Part Number",
+        "Filename",
+        "Material",
+        "Filament Cost (\u20b9/kg)",
+        "Filament (g)",
+        "Time (h)",
+        "Labour Time (min)",
+        "User COGS (\u20b9)",
+        "Default COGS (\u20b9)",
+        "Source Link"
+    ],
+    "SLICER_EXECUTABLE_PATH": "C:\\Program Files\\OrcaSlicer\\orca-slicer.exe",
+    "SLICER_SYSTEM_PROFILE_PATH": "C:\\Users\\YourUser\\AppData\\Roaming\\OrcaSlicer\\user",
+    "SECRET_KEY": "7c80d038626ec9e191a3481eacd7647016aa698843fb6ee54a9684a9dad6feed"
+}
