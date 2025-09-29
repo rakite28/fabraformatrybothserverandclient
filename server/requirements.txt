@@ -1,0 +1,12 @@
+Flask
+Flask-Cors
+pydantic
+Werkzeug
+PyJWT
+easyocr
+openpyxl
+reportlab
+Pillow
+torch
+transformers
+waitress

@@ -6,14 +6,17 @@ import uuid
 import time
 from werkzeug.security import generate_password_hash
 
-DB_FILE = "server_data.sqlite"
+# The CWD will be the 'server' directory, so we go up one level to the project root.
+DB_FILE = "../server_data.sqlite"
 
 def get_db_connection():
+    """Establishes a connection to the SQLite database."""
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
     return conn
 
-def init_db(script_dir):
+def init_db():
+    """Initializes the database schema and default data if it doesn't exist."""
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -74,13 +77,13 @@ def init_db(script_dir):
         default_email = f"admin@{default_company_id}.com"
         cursor.execute("INSERT INTO users (id, username, email, password_hash, company_id, role) VALUES (?, ?, ?, ?, ?, ?)",
                        (str(uuid.uuid4()), "admin", default_email, default_password_hash, default_company_id, "admin"))
-        print(f"  -> Created default admin user (login with email: {default_email} and password: password).")
+        print(f"  -> Created default admin user (login with email: {default_email} and password: password).")
 
         cursor.execute("""
             INSERT INTO printers (id, company_id, brand, model, setup_cost, maintenance_cost, lifetime_years, power_w, price_kwh, buffer_factor, uptime_percent)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (str(time.time()), default_company_id, "Bambu Lab", "P1S", 70000, 5000, 5, 300, 8.0, 1.0, 50))
-        print("  -> Created default printer.")
+        print("  -> Created default printer.")
 
         default_filaments = [
             (default_company_id, "PLA", "Generic", 1200, 1000, 1.0),
@@ -89,9 +92,9 @@ def init_db(script_dir):
         cursor.executemany("""
             INSERT INTO filaments (company_id, material, brand, price, stock_g, efficiency_factor)
             VALUES (?, ?, ?, ?, ?, ?)""", default_filaments)
-        print("  -> Created default filaments.")
+        print("  -> Created default filaments.")
 
-    # --- NEW: Create the auth_tokens table if it doesn't exist ---
+    # --- Create the auth_tokens table if it doesn't exist ---
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='auth_tokens';")
     if not cursor.fetchone():
         print("INFO: Creating 'auth_tokens' table for 'Remember Me' functionality...")
