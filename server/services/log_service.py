@@ -10,7 +10,7 @@ def save_app_log(company_id, final_data, cogs_data, local_image_filename):
     try:
         logs = []
         if os.path.exists(log_path):
-            with open(log_path, 'r') as f:
+            with open(log_path, 'r', encoding='utf-8') as f:
                 content = f.read()
                 logs = json.loads(content) if content else []
 
@@ -31,7 +31,7 @@ def save_app_log(company_id, final_data, cogs_data, local_image_filename):
         logs.append(log_entry)
         logs.sort(key=lambda x: x['timestamp'], reverse=True)
 
-        with open(log_path, 'w') as f:
+        with open(log_path, 'w', encoding='utf-8') as f:
             json.dump(logs, f, indent=4)
 
     except Exception as e:
@@ -43,13 +43,13 @@ def update_processed_log(company_id, original_filename):
     try:
         processed_log = {}
         if os.path.exists(processed_log_path):
-            with open(processed_log_path, 'r') as f:
+            with open(processed_log_path, 'r', encoding='utf-8') as f:
                 content = f.read()
                 processed_log = json.loads(content) if content else {}
 
         processed_log[original_filename] = "completed"
 
-        with open(processed_log_path, 'w') as f:
+        with open(processed_log_path, 'w', encoding='utf-8') as f:
             json.dump(processed_log, f, indent=2)
 
     except Exception as e:

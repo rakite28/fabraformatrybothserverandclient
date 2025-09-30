@@ -59,7 +59,7 @@ def download_server_file(filepath):
 def get_logs():
     log_path = get_company_data_path(g.current_user['company_id'], "app_logs.json")
     try:
-        with open(log_path, 'r') as f:
+        with open(log_path, 'r', encoding='utf-8') as f:
             return jsonify(json.load(f))
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify([])
@@ -69,7 +69,7 @@ def get_logs():
 def get_processed_log():
     log_path = get_company_data_path(g.current_user['company_id'], "processed_log.json")
     try:
-        with open(log_path, 'r') as f:
+        with open(log_path, 'r', encoding='utf-8') as f:
             return jsonify(json.load(f))
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify({})
