@@ -1,5 +1,5 @@
 import ttkbootstrap as ttk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, END
 
 from .base_page import Page
 from ...helpers import load_client_config, save_client_config
