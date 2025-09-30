@@ -205,6 +205,22 @@ class MainApp:
         # ... (implementation to be added)
         pass
 
+    def update_sidebar_state(self, is_running):
+        new_state = "disabled" if is_running else "normal"
+        for name, button in self.sidebar_buttons.items():
+            if name != "Monitor":
+                button.config(state=new_state)
+
+        # Also manage the profile button state
+        if new_state == "disabled":
+            self.profile_frame.unbind("<Button-1>")
+            self.profile_icon_label.unbind("<Button-1>")
+            self.profile_name_label.unbind("<Button-1>")
+        else:
+            self.profile_frame.bind("<Button-1>", lambda e: self.show_page("Profile"))
+            self.profile_icon_label.bind("<Button-1>", lambda e: self.show_page("Profile"))
+            self.profile_name_label.bind("<Button-1>", lambda e: self.show_page("Profile"))
+
     def show_page(self, page_name):
         for name, button in self.sidebar_buttons.items():
             button.config(bootstyle="dark-outline" if name != page_name else "primary")
