@@ -4218,3 +4218,43 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: type object 'dict' has no attribute 'parse_obj'
 2025-09-24 19:35:35,370 - werkzeug - INFO - 122.179.135.113 - - [24/Sep/2025 19:35:35] "[31m[1mPOST /filaments HTTP/1.1[0m" 400 - [in c:\Program Files\Python312\Lib\site-packages\werkzeug\_internal.py:97]
+2025-09-30 08:33:02,274 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:33:02,274 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:33:02,369 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 08:33:02,369 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 08:33:02,376 - easyocr.easyocr - WARNING - Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU. [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/easyocr/easyocr.py:80]
+2025-09-30 08:33:15,793 - app - INFO - ✅ EasyOCR model loaded with GPU. [in /app/server/services/ocr_service.py:14]
+2025-09-30 08:33:15,793 - app - INFO - ✅ EasyOCR model loaded with GPU. [in /app/server/services/ocr_service.py:14]
+2025-09-30 08:33:15,793 - moderator - INFO - Initializing local NSFW detection model... [in /app/server/moderator.py:24]
+2025-09-30 08:33:15,793 - moderator - INFO - NSFW model will run on device: cpu [in /app/server/moderator.py:28]
+2025-09-30 08:33:16,459 - moderator - INFO - ✅ NSFW detection model loaded successfully. [in /app/server/moderator.py:37]
+2025-09-30 08:33:16,471 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.2:5000 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:33:16,472 - werkzeug - INFO - [33mPress CTRL+C to quit[0m [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:33:16,473 - werkzeug - INFO -  * Restarting with stat [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:33:23,640 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:33:23,640 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:33:23,660 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 08:33:23,660 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 08:33:23,661 - easyocr.easyocr - WARNING - Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU. [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/easyocr/easyocr.py:80]
+2025-09-30 08:33:30,944 - app - INFO - ✅ EasyOCR model loaded with GPU. [in /app/server/services/ocr_service.py:14]
+2025-09-30 08:33:30,944 - app - INFO - ✅ EasyOCR model loaded with GPU. [in /app/server/services/ocr_service.py:14]
+2025-09-30 08:33:30,944 - moderator - INFO - Initializing local NSFW detection model... [in /app/server/moderator.py:24]
+2025-09-30 08:33:30,944 - moderator - INFO - NSFW model will run on device: cpu [in /app/server/moderator.py:28]
+2025-09-30 08:33:31,394 - moderator - INFO - ✅ NSFW detection model loaded successfully. [in /app/server/moderator.py:37]
+2025-09-30 08:33:31,402 - werkzeug - WARNING -  * Debugger is active! [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:33:31,407 - werkzeug - INFO -  * Debugger PIN: 148-452-288 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:44:28,471 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:44:28,471 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:44:28,507 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.2:5000 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:44:28,507 - werkzeug - INFO - [33mPress CTRL+C to quit[0m [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:44:28,508 - werkzeug - INFO -  * Restarting with stat [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:44:35,688 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:44:35,688 - app - INFO - Application starting up... [in /app/server/app.py:149]
+2025-09-30 08:44:35,711 - werkzeug - WARNING -  * Debugger is active! [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 08:44:35,712 - werkzeug - INFO -  * Debugger PIN: 148-452-288 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]

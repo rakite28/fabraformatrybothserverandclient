@@ -5,9 +5,9 @@ import secrets
 from datetime import datetime, timedelta
 import uuid
 
-from ..database import get_db_connection
-from ..validators import LoginModel, RegisterCompanyModel, RefreshTokenModel
-from ..decorators import validate_with
+from database import get_db_connection
+from validators import LoginModel, RegisterCompanyModel, RefreshTokenModel
+from decorators import validate_with
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 

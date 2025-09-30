@@ -5,7 +5,7 @@ from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
 from flask import current_app
 
-from ..helpers import get_company_data_path
+from helpers import get_company_data_path
 from .calculation_service import parse_time_string
 
 def create_excel_file(company_id, final_data, printer, filament, config):

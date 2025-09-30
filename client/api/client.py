@@ -1,6 +1,6 @@
 import os
 import json
-from tkinter import messagebox
+# from tkinter import messagebox # Commented out for headless testing
 import requests
 import jwt
 from jwt import PyJWTError
@@ -40,7 +40,8 @@ class APIClient:
                 except (json.JSONDecodeError, AttributeError):
                     message = response.text
         print(f"API Error: {message}")
-        messagebox.showerror(title, f"An error occurred:\n\n{message}")
+        # messagebox.showerror(title, f"An error occurred:\n\n{message}")
+        print(f"{title}: An error occurred:\n\n{message}")
 
     def login(self, identifier, password, remember_me=False):
         try:
@@ -53,7 +54,8 @@ class APIClient:
                 try:
                     self.user_info = jwt.decode(self.token, options={"verify_signature": False})
                 except PyJWTError as e:
-                    messagebox.showerror("Token Error", f"Could not decode user info: {e}")
+                    # messagebox.showerror("Token Error", f"Could not decode user info: {e}")
+                    print(f"Token Error: Could not decode user info: {e}")
                     self.logout()
                     return None
                 return data
@@ -73,7 +75,8 @@ class APIClient:
                 try:
                     self.user_info = jwt.decode(self.token, options={"verify_signature": False})
                 except PyJWTError as e:
-                    messagebox.showerror("Token Error", f"Could not decode user info: {e}")
+                    # messagebox.showerror("Token Error", f"Could not decode user info: {e}")
+                    print(f"Token Error: Could not decode user info: {e}")
                     self.logout()
                     return False
                 return True

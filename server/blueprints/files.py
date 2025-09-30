@@ -2,8 +2,8 @@ from flask import Blueprint, jsonify, request, g, current_app, send_from_directo
 from werkzeug.utils import secure_filename
 import os
 
-from ..decorators import admin_required, token_required
-from ..helpers import get_safe_path, get_company_data_path
+from decorators import admin_required, token_required
+from helpers import get_safe_path, get_company_data_path
 
 files_bp = Blueprint('files', __name__)
 

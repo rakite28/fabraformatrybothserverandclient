@@ -5,11 +5,11 @@ import uuid
 import time
 import os
 
-from ..database import get_db_connection
-from ..validators import CreateUserModel, ChangePasswordModel, UpdateProfileModel
-from ..decorators import validate_with, token_required, admin_required
-from ..helpers import get_company_data_path
-from ..moderator import NSFWDetector
+from database import get_db_connection
+from validators import CreateUserModel, ChangePasswordModel, UpdateProfileModel
+from decorators import validate_with, token_required, admin_required
+from helpers import get_company_data_path
+from moderator import NSFWDetector
 
 users_bp = Blueprint('users', __name__, url_prefix='/user')
 

@@ -1,6 +1,6 @@
 {
     "SERVER_SHARE_DIR": "server_share",
-    "TEMPLATE_PATH": "FDM.xlsx",
+    "TEMPLATE_PATH": "/app/server/FDM.xlsx",
     "cells": [
         "D4",
         "D9",
