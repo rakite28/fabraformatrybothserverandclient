@@ -1,0 +1,28 @@
+import os
+from flask import current_app
+
+def get_company_data_path(company_id, *args):
+    """
+    Constructs a path to a file or directory within a company's specific data folder.
+    Creates the directory if it doesn't exist.
+    """
+    # current_app.root_path will be the 'server' directory. The 'data' directory is at the root level.
+    base_path = os.path.join(current_app.root_path, '..', 'data', str(company_id))
+    # Using abspath to resolve '..' and ensure we have a full path
+    full_base_path = os.path.abspath(base_path)
+    os.makedirs(full_base_path, exist_ok=True)
+    return os.path.join(full_base_path, *args)
+
+def get_safe_path(subpath):
+    """
+    Safely joins a subpath to the server's shared directory, preventing directory traversal attacks.
+    """
+    share_dir = os.path.abspath(current_app.config.get("APP_CONFIG", {}).get("SERVER_SHARE_DIR", "server_share"))
+    # The share dir path should be relative to the root, not the server folder
+    share_dir_abs = os.path.join(current_app.root_path, '..', share_dir)
+
+    target_path = os.path.abspath(os.path.join(share_dir_abs, subpath))
+
+    if not target_path.startswith(os.path.abspath(share_dir_abs)):
+        return None
+    return target_path
