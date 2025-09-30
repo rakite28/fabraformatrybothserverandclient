@@ -54,7 +54,7 @@ class PrinterModel(BaseModel):
 
 class FilamentsPostModel(BaseModel):
     price: float = Field(..., ge=0, description="Price must be zero or greater.")
-    stock_g: float = Field(..., ge=0, description="Stock must be zero or greater.")
+    stock_g: float = Field(..., description="Stock must be zero or greater.")
     efficiency_factor: float = Field(..., gt=0, description="Efficiency factor must be greater than zero.")
 
 # --- CORE LOGIC ---
