@@ -16,11 +16,9 @@ def validate_with(model: any):
                 else:
                     return jsonify({"error": "Unsupported Media Type. Expected JSON or multipart/form-data."}), 415
 
-                if isinstance(json_data, list):
-                    g.validated_data = parse_obj_as(model, json_data)
-                else:
-                    g.validated_data = model.parse_obj(json_data)
-
+                # Use parse_obj_as for all cases, as it correctly handles
+                # complex types like List[Model] or Dict[str, Model]
+                g.validated_data = parse_obj_as(model, json_data)
                 return f(*args, **kwargs)
             except ValidationError as e:
                 # Let the global error handler catch this
