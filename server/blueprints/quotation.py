@@ -6,11 +6,11 @@ import uuid
 from io import BytesIO
 import re
 
-from ..decorators import validate_with, token_required
-from ..validators import SliceRequestModel, GenerateQuotationModel
-from ..helpers import get_company_data_path
-from ..services.slicer_service import run_slicer, find_profile_path
-from ..services.pdf_service import generate_quotation_pdf
+from decorators import validate_with, token_required
+from validators import SliceRequestModel, GenerateQuotationModel
+from helpers import get_company_data_path
+from services.slicer_service import run_slicer, find_profile_path
+from services.pdf_service import generate_quotation_pdf
 
 quotation_bp = Blueprint('quotation', __name__, url_prefix='/quotation')
 

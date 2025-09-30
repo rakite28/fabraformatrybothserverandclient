@@ -5,7 +5,7 @@ import sys
 from werkzeug.utils import secure_filename
 from flask import current_app
 
-from ..helpers import get_company_data_path
+from helpers import get_company_data_path
 
 def find_profile_path(company_id, profile_type, filename, config):
     safe_filename = secure_filename(filename)

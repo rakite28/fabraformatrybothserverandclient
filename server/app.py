@@ -3,25 +3,26 @@ import json
 import logging
 from logging.handlers import RotatingFileHandler
 import secrets
+import threading
 
 from flask import Flask, jsonify, g
 from flask_cors import CORS
 from pydantic import ValidationError
 
-from .database import init_db, get_db_connection
-from .helpers import get_company_data_path
-from .services.ocr_service import get_ocr_reader
-from .moderator import get_nsfw_detector
+from database import init_db, get_db_connection
+from helpers import get_company_data_path
+from services.ocr_service import get_ocr_reader
+from moderator import get_nsfw_detector
 
 # --- Blueprint Imports ---
-from .blueprints.auth import auth_bp
-from .blueprints.users import users_bp
-from .blueprints.printers import printers_bp
-from .blueprints.filaments import filaments_bp
-from .blueprints.quotation import quotation_bp
-from .blueprints.processing import processing_bp
-from .blueprints.files import files_bp
-from .blueprints.config import config_bp, load_app_config, save_app_config
+from blueprints.auth import auth_bp
+from blueprints.users import users_bp
+from blueprints.printers import printers_bp
+from blueprints.filaments import filaments_bp
+from blueprints.quotation import quotation_bp
+from blueprints.processing import processing_bp
+from blueprints.files import files_bp
+from blueprints.config import config_bp, load_app_config, save_app_config
 
 def create_app():
     """Application factory for the Flask app."""
@@ -29,18 +30,19 @@ def create_app():
     CORS(app)
 
     # --- Initial Setup ---
-    # SCRIPT_DIR is the 'server' directory
+    # SCRIPT_DIR is the 'server' directory.
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-    os.chdir(SCRIPT_DIR)
 
-    CONFIG_PATH = "server_config.json"
+    # All paths should be absolute or relative to the app's instance folder,
+    # not dependent on the current working directory.
+    CONFIG_PATH = os.path.join(SCRIPT_DIR, "server_config.json")
     app.config['CONFIG_PATH'] = CONFIG_PATH
 
     # --- Centralized Logging Setup ---
     setup_logging(app)
 
     # --- Load Configuration ---
-    APP_CONFIG = load_app_config()
+    APP_CONFIG = load_app_config(app)
     defaults = {
         "SERVER_SHARE_DIR": "server_share",
         "TEMPLATE_PATH": "FDM.xlsx",
@@ -60,12 +62,12 @@ def create_app():
     # Make the template path absolute to avoid ambiguity
     if not os.path.isabs(APP_CONFIG.get("TEMPLATE_PATH", "")):
         # The path is relative to the server directory, where app.py is
-        APP_CONFIG['TEMPLATE_PATH'] = os.path.abspath(APP_CONFIG['TEMPLATE_PATH'])
+        APP_CONFIG['TEMPLATE_PATH'] = os.path.join(SCRIPT_DIR, APP_CONFIG['TEMPLATE_PATH'])
         config_updated = True
 
     if config_updated or 'SECRET_KEY' not in APP_CONFIG:
         APP_CONFIG['SECRET_KEY'] = app.config['SECRET_KEY']
-        save_app_config(APP_CONFIG)
+        save_app_config(app, APP_CONFIG)
 
     # Store the final, potentially updated, config in the app context
     app.config['APP_CONFIG'] = APP_CONFIG.copy()
@@ -120,11 +122,21 @@ def create_app():
             db.close()
 
     # --- Pre-load Models ---
+    # Load models in a background thread to not block the app startup
+    model_loader_thread = threading.Thread(target=load_models_in_background, args=(app,))
+    model_loader_thread.daemon = True  # Allows app to exit even if thread is running
+    model_loader_thread.start()
+
+    return app
+
+def load_models_in_background(app):
+    """
+    Loads the OCR and NSFW models in a background thread
+    to avoid blocking the server startup.
+    """
     with app.app_context():
         get_ocr_reader()
         get_nsfw_detector()
-
-    return app
 
 def setup_logging(app):
     """Configures logging for the application."""
@@ -146,8 +158,3 @@ def setup_logging(app):
     app.logger.addHandler(handler)
     app.logger.setLevel(logging.INFO)
     app.logger.info("Application starting up...")
-
-if __name__ == "__main__":
-    app = create_app()
-    # Note: For production, use a proper WSGI server like Gunicorn or Waitress
-    app.run(host='0.0.0.0', port=5000, debug=True)

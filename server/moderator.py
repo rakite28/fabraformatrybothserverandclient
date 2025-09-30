@@ -86,3 +86,16 @@ class NSFWDetector:
             # Fail open in case of an unexpected error during processing.
             return (True, "Could not perform moderation check due to an error.")
 
+# --- Singleton instance for the NSFW Detector ---
+# This ensures the model is loaded only once.
+_nsfw_detector_instance = None
+
+def get_nsfw_detector():
+    """
+    Returns a singleton instance of the NSFWDetector.
+    The model is initialized on the first call.
+    """
+    global _nsfw_detector_instance
+    if _nsfw_detector_instance is None:
+        _nsfw_detector_instance = NSFWDetector()
+    return _nsfw_detector_instance

@@ -6,8 +6,9 @@ import uuid
 import time
 from werkzeug.security import generate_password_hash
 
-# The CWD will be the 'server' directory, so we go up one level to the project root.
-DB_FILE = "../server_data.sqlite"
+# The database is located in the project root, one level above this 'server' directory.
+# We construct an absolute path to it to avoid any ambiguity.
+DB_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'server_data.sqlite'))
 
 def get_db_connection():
     """Establishes a connection to the SQLite database."""

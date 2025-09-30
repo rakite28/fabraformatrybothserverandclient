@@ -2,7 +2,7 @@ import os
 import json
 from flask import current_app
 
-from ..helpers import get_company_data_path
+from helpers import get_company_data_path
 
 def save_app_log(company_id, final_data, cogs_data, local_image_filename):
     """Saves a new entry to the company's JSON application log."""

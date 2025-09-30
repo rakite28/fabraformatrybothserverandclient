@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request, g
 from typing import Dict
 
-from ..database import get_db_connection
-from ..validators import FilamentsPostModel
-from ..decorators import validate_with, token_required
+from database import get_db_connection
+from validators import FilamentsPostModel
+from decorators import validate_with, token_required
 
 filaments_bp = Blueprint('filaments', __name__, url_prefix='/filaments')
 

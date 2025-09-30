@@ -1,15 +1,15 @@
 from flask import Blueprint, jsonify, request, g, current_app
 import os
 
-from ..database import get_db_connection
-from ..decorators import token_required, validate_with
-from ..validators import ProcessImageModel
-from ..helpers import get_company_data_path
-from ..moderator import NSFWDetector
-from ..services.ocr_service import get_ocr_reader, extract_data_from_ocr
-from ..services.calculation_service import calculate_cogs_values
-from ..services.excel_service import create_excel_file, log_to_master_excel
-from ..services.log_service import save_app_log, update_processed_log
+from database import get_db_connection
+from decorators import token_required, validate_with
+from validators import ProcessImageModel
+from helpers import get_company_data_path
+from moderator import NSFWDetector
+from services.ocr_service import get_ocr_reader, extract_data_from_ocr
+from services.calculation_service import calculate_cogs_values
+from services.excel_service import create_excel_file, log_to_master_excel
+from services.log_service import save_app_log, update_processed_log
 
 processing_bp = Blueprint('processing', __name__)
 

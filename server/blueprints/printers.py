@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request, g
 from typing import List
 
-from ..database import get_db_connection
-from ..validators import PrinterModel
-from ..decorators import validate_with, token_required
+from database import get_db_connection
+from validators import PrinterModel
+from decorators import validate_with, token_required
 
 printers_bp = Blueprint('printers', __name__, url_prefix='/printers')
 

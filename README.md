@@ -38,16 +38,11 @@ The repository is organized into two main components:
 - Python 3.8 or newer
 - (Optional but Recommended) Git for cloning the repository
 
-### 1. Server Setup
+### 1. Environment Setup
 
-First, set up and run the backend server.
+This project uses two sets of dependencies: one for the server and one for the client. It is recommended to use a single virtual environment for both.
 
-1.  **Navigate to the server directory:**
-    ```bash
-    cd server
-    ```
-
-2.  **Create and activate a virtual environment:**
+1.  **Create and activate a virtual environment from the project root:**
     - On macOS/Linux:
       ```bash
       python3 -m venv venv
@@ -59,53 +54,31 @@ First, set up and run the backend server.
       .\venv\Scripts\activate
       ```
 
-3.  **Install the required dependencies:**
+2.  **Install all dependencies:**
+    From the project root, run the following commands to install dependencies for both the server and the client:
     ```bash
-    pip install -r requirements.txt
+    pip install -r requirements.txt       # Server dependencies
+    pip install -r client/requirements.txt # Client dependencies
     ```
-    *Note: This may take some time as it includes downloading machine learning models for OCR and NSFW detection.*
+    *Note: The server installation may take some time as it includes downloading machine learning models for OCR and NSFW detection.*
 
-4.  **(Optional) Configure Server Settings:**
-    Open the `server_config.json` file. The default settings are generally fine for local use, but you may need to update the paths for the OrcaSlicer integration if you have it installed in a non-default location:
-    - `SLICER_EXECUTABLE_PATH`: The full path to your `orca-slicer.exe` (or equivalent).
-    - `SLICER_SYSTEM_PROFILE_PATH`: The path to your OrcaSlicer user profiles directory.
+### 2. Running the Application
 
-5.  **Run the server:**
+The server must be running before you start the client.
+
+1.  **Run the Server:**
+    From the project root, run the following command:
     ```bash
-    python app.py
+    python run_server.py
     ```
-    The server will start, initialize the database (`server_data.sqlite` in the root directory), and will be ready to accept connections on `http://localhost:5000`.
+    The server will start, initialize the database (`server_data.sqlite` in the root directory), and will be ready to accept connections on `http://localhost:5000`. The first time it runs, it will load the necessary machine learning models, which may take a few minutes.
 
-### 2. Client Setup
-
-Next, set up and run the desktop client in a **separate terminal window**.
-
-1.  **Navigate to the client directory:**
+2.  **Run the Client:**
+    In a **separate terminal window** (with the same virtual environment activated), run the following command from the project root:
     ```bash
-    cd client
+    python client/main.py
     ```
-
-2.  **Create and activate a virtual environment:**
-    - On macOS/Linux:
-      ```bash
-      python3 -m venv venv
-      source venv/bin/activate
-      ```
-    - On Windows:
-      ```bash
-      python -m venv venv
-      .\venv\Scripts\activate
-      ```
-
-3.  **Install the required dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  **Run the client:**
-    ```bash
-    python main.py
-    ```
+    *Note: The client is a desktop GUI application and requires a graphical environment to run. It cannot be run in a headless environment.*
 
 ## How to Use
 
