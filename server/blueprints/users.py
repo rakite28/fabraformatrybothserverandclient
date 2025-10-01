@@ -115,7 +115,18 @@ def upload_profile_picture():
 @users_bp.route('/profile_picture/<path:filename>')
 @token_required
 def serve_profile_picture(filename):
-    company_id = g.current_user['company_id']
+    try:
+        user_id = filename.split('_')[0]
+    except IndexError:
+        return jsonify({'message': 'Invalid filename format'}), 400
+
+    db = get_db_connection()
+    user = db.execute("SELECT company_id FROM users WHERE id = ?", (user_id,)).fetchone()
+
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+
+    company_id = user['company_id']
     directory = get_company_data_path(company_id, "profile_pictures")
     return send_from_directory(directory, filename)
 

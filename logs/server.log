@@ -4258,3 +4258,95 @@ AttributeError: type object 'dict' has no attribute 'parse_obj'
 2025-09-30 08:44:35,688 - app - INFO - Application starting up... [in /app/server/app.py:149]
 2025-09-30 08:44:35,711 - werkzeug - WARNING -  * Debugger is active! [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
 2025-09-30 08:44:35,712 - werkzeug - INFO -  * Debugger PIN: 148-452-288 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 19:16:17,666 - app - INFO - Application starting up... [in /app/server/app.py:160]
+2025-09-30 19:16:17,666 - app - INFO - Application starting up... [in /app/server/app.py:160]
+2025-09-30 19:16:17,684 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 19:16:17,684 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 19:16:17,685 - easyocr.easyocr - WARNING - Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU. [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/easyocr/easyocr.py:80]
+2025-09-30 19:16:17,702 - werkzeug - WARNING -  * Debugger is active! [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 19:16:17,702 - werkzeug - INFO -  * Debugger PIN: 148-452-288 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 19:16:18,728 - werkzeug - INFO -  * Detected change in '/app/server/moderator.py', reloading [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 19:18:02,093 - app - INFO - Application starting up... [in /app/server/app.py:160]
+2025-09-30 19:18:02,093 - app - INFO - Application starting up... [in /app/server/app.py:160]
+2025-09-30 19:18:02,111 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 19:18:02,111 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-09-30 19:18:02,112 - easyocr.easyocr - WARNING - Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU. [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/easyocr/easyocr.py:80]
+2025-09-30 19:18:02,123 - werkzeug - WARNING -  * Debugger is active! [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 19:18:02,124 - werkzeug - INFO -  * Debugger PIN: 148-452-288 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-09-30 19:18:02,140 - app - ERROR - An unhandled exception occurred: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again. [in /app/server/app.py:97]
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/server/blueprints/users.py", line 130, in serve_profile_picture
+    return send_from_directory(directory, filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/helpers.py", line 572, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/utils.py", line 575, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-09-30 19:18:02,140 - app - ERROR - An unhandled exception occurred: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again. [in /app/server/app.py:97]
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/server/blueprints/users.py", line 130, in serve_profile_picture
+    return send_from_directory(directory, filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/helpers.py", line 572, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/utils.py", line 575, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-09-30 19:18:02,154 - werkzeug - INFO - 127.0.0.1 - - [30/Sep/2025 19:18:02] "[35m[1mHEAD /user/profile_picture/047bdd35-0e92-437f-b24e-4eca72b5cfbe_1756103854.png HTTP/1.1[0m" 500 - [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-10-01 18:37:06,443 - app - INFO - Application starting up... [in /app/server/app.py:160]
+2025-10-01 18:37:06,443 - app - INFO - Application starting up... [in /app/server/app.py:160]
+2025-10-01 18:37:06,461 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-10-01 18:37:06,461 - app - INFO - ⏳ Loading EasyOCR model into memory... [in /app/server/services/ocr_service.py:11]
+2025-10-01 18:37:06,463 - easyocr.easyocr - WARNING - Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU. [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/easyocr/easyocr.py:80]
+2025-10-01 18:37:06,475 - werkzeug - WARNING -  * Debugger is active! [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-10-01 18:37:06,475 - werkzeug - INFO -  * Debugger PIN: 148-452-288 [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
+2025-10-01 18:37:06,492 - app - ERROR - An unhandled exception occurred: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again. [in /app/server/app.py:97]
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/server/blueprints/users.py", line 130, in serve_profile_picture
+    return send_from_directory(directory, filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/helpers.py", line 572, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/utils.py", line 575, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-10-01 18:37:06,492 - app - ERROR - An unhandled exception occurred: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again. [in /app/server/app.py:97]
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/server/blueprints/users.py", line 130, in serve_profile_picture
+    return send_from_directory(directory, filename)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/flask/helpers.py", line 572, in send_from_directory
+    return werkzeug.utils.send_from_directory(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/utils.py", line 575, in send_from_directory
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-10-01 18:37:06,502 - werkzeug - INFO - 127.0.0.1 - - [01/Oct/2025 18:37:06] "[35m[1mHEAD /user/profile_picture/047bdd35-0e92-437f-b24e-4eca72b5cfbe_1756103854.png HTTP/1.1[0m" 500 - [in /home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/werkzeug/_internal.py:97]
