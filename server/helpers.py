@@ -10,8 +10,17 @@ def get_company_data_path(company_id, *args):
     base_path = os.path.join(current_app.root_path, '..', 'data', str(company_id))
     # Using abspath to resolve '..' and ensure we have a full path
     full_path = os.path.abspath(os.path.join(base_path, *args))
-    # Create the full directory path if it doesn't exist
-    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+
+    # Check if the path appears to be for a file or a directory
+    if os.path.splitext(full_path)[1]:
+        # Path has a file extension, so we assume it's a file.
+        # Ensure the directory containing the file exists.
+        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    else:
+        # Path does not have a file extension, so we assume it's a directory.
+        # Ensure the directory itself exists.
+        os.makedirs(full_path, exist_ok=True)
+
     return full_path
 
 def get_safe_path(subpath):
