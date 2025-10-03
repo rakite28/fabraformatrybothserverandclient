@@ -163,7 +163,19 @@ class APIClient:
             self._handle_error(e, e.response)
             return None
         except FileNotFoundError:
-            messagebox.showerror("File Error", f"File not found: {file_path}")
+            # messagebox.showerror("File Error", f"File not found: {file_path}")
+            print(f"File Error: File not found: {file_path}")
+            return None
+
+    def get_profile_picture(self, url):
+        headers = self._get_auth_header()
+        if not headers: return None
+        try:
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            return response.content
+        except requests.exceptions.RequestException as e:
+            self._handle_error(e, e.response)
             return None
 
     def get_server_settings(self):

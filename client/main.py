@@ -224,23 +224,23 @@ class MainApp:
 
             p_picture_url = profile_data.get('profile_picture_url')
             if p_picture_url:
-                try:
-                    # Construct the full URL if a relative path is given
-                    if p_picture_url.startswith('/'):
-                        p_picture_url = f"{self.api.SERVER_URL}{p_picture_url}"
+                # Construct the full URL if a relative path is given
+                if p_picture_url.startswith('/'):
+                    p_picture_url = f"{self.api.SERVER_URL.rstrip('/')}{p_picture_url}"
 
-                    response = requests.get(p_picture_url, stream=True)
-                    response.raise_for_status()
-                    image_data = response.content
+                image_data = self.api.get_profile_picture(p_picture_url)
 
-                    # Open the image and create a circular version
-                    img = Image.open(io.BytesIO(image_data))
-                    self.profile_photo = ImageTk.PhotoImage(create_circular_image(img, 32))
-
-                    self.master.after(0, self.profile_icon_label.config, {"image": self.profile_photo})
-
-                except (requests.RequestException, IOError) as e:
-                    print(f"Failed to load profile picture: {e}")
+                if image_data:
+                    try:
+                        # Open the image and create a circular version
+                        img = Image.open(io.BytesIO(image_data))
+                        self.profile_photo = ImageTk.PhotoImage(create_circular_image(img, 32))
+                        self.master.after(0, self.profile_icon_label.config, {"image": self.profile_photo})
+                    except IOError as e:
+                        print(f"Failed to process profile picture: {e}")
+                        self.master.after(0, self.profile_icon_label.config, {"text": "👤"}) # Fallback icon
+                else:
+                    # The API client now handles the error logging, so we just set the fallback
                     self.master.after(0, self.profile_icon_label.config, {"text": "👤"}) # Fallback icon
             else:
                 self.master.after(0, self.profile_icon_label.config, {"text": "👤"}) # Fallback icon
