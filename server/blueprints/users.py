@@ -126,8 +126,17 @@ def serve_profile_picture(filename):
     if not user:
         return jsonify({'message': 'User not found'}), 404
 
+    # Authorization check: ensure the requester belongs to the same company
+    if g.current_user['company_id'] != user['company_id']:
+        return jsonify({'message': 'Forbidden'}), 403
+
     company_id = user['company_id']
     directory = get_company_data_path(company_id, "profile_pictures")
+
+    # To prevent 500 errors, check if file exists before serving
+    if not os.path.exists(os.path.join(directory, filename)):
+        return jsonify({'message': 'Profile picture not found.'}), 404
+
     return send_from_directory(directory, filename)
 
 @users_bp.route('/create_user', methods=['POST'])
