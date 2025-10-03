@@ -9,9 +9,10 @@ def get_company_data_path(company_id, *args):
     # current_app.root_path will be the 'server' directory. The 'data' directory is at the root level.
     base_path = os.path.join(current_app.root_path, '..', 'data', str(company_id))
     # Using abspath to resolve '..' and ensure we have a full path
-    full_base_path = os.path.abspath(base_path)
-    os.makedirs(full_base_path, exist_ok=True)
-    return os.path.join(full_base_path, *args)
+    full_path = os.path.abspath(os.path.join(base_path, *args))
+    # Create the full directory path if it doesn't exist
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    return full_path
 
 def get_safe_path(subpath):
     """
