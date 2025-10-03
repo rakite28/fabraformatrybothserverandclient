@@ -415,16 +415,15 @@ class APIClient:
         headers = self._get_auth_header()
         if not headers: return None
 
-        json_data = json.dumps({
+        data = {
             "machine_profile": machine_profile,
             "filament_profile": filament_profile,
             "process_profile": process_profile
-        })
+        }
 
         try:
             with open(stl_file_path, 'rb') as f:
                 files = {'stl_file': (os.path.basename(stl_file_path), f, 'application/octet-stream')}
-                data = {'json_data': json_data}
                 response = requests.post(f"{SERVER_URL}/quote/slice-and-calculate", files=files, data=data, headers=headers)
                 response.raise_for_status()
                 return response.json()
@@ -432,5 +431,6 @@ class APIClient:
             self._handle_error(e, e.response)
             return None
         except FileNotFoundError:
-            messagebox.showerror("File Error", f"STL file not found: {stl_file_path}")
+            # messagebox.showerror("File Error", f"STL file not found: {stl_file_path}")
+            print(f"File Error: STL file not found: {stl_file_path}")
             return None
