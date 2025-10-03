@@ -1,18 +1,22 @@
-# Logs
-logs/
-*.log
-
-# Data
-data/
-server_data.sqlite
-
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 venv/
 .venv/
 .env
 
-# IDEs
+# Database
+server_data.sqlite
+
+# Data files
+data/
+
+# Logs
+logs/
+*.log
+
+# IDE
 .vscode/
 .idea/
