@@ -12,9 +12,9 @@ from helpers import get_company_data_path
 from services.slicer_service import run_slicer, find_profile_path
 from services.pdf_service import generate_quotation_pdf
 
-quotation_bp = Blueprint('quotation', __name__, url_prefix='/quotation')
+quotation_bp = Blueprint('quotation', __name__, url_prefix='/quote')
 
-@quotation_bp.route('/slice_model', methods=['POST'])
+@quotation_bp.route('/slice-and-calculate', methods=['POST'])
 @token_required
 def slice_model():
     company_id = g.current_user['company_id']
@@ -27,8 +27,9 @@ def slice_model():
         return jsonify({"error": f"Invalid form data: {e}"}), 400
 
     stl_file = request.files['stl_file']
-    if not stl_file.filename.lower().endswith('.stl'):
-        return jsonify({"error": "Invalid file type. Only .stl is supported."}), 400
+    filename = stl_file.filename.lower()
+    if not (filename.endswith('.stl') or filename.endswith('.3mf')):
+        return jsonify({"error": "Invalid file type. Only .stl or .3mf are supported."}), 400
 
     temp_dir = get_company_data_path(company_id, "temp_slice", str(uuid.uuid4()))
     os.makedirs(temp_dir, exist_ok=True)
