@@ -3,6 +3,9 @@ import sys
 import threading
 import traceback
 from datetime import datetime
+import io
+import requests
+from PIL import Image, ImageTk
 
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -202,8 +205,47 @@ class MainApp:
         return self.cache.get(key)
 
     def update_profile_widget(self, force_refresh=False):
-        # ... (implementation to be added)
-        pass
+        def update_task():
+            # Attempt to get data from cache first
+            cached_profile = self.get_cached_data("user_profile")
+            if cached_profile and not force_refresh:
+                profile_data = cached_profile
+            else:
+                profile_data = self.api.get_profile()
+                if profile_data:
+                    self.cache_data("user_profile", profile_data)
+
+            if not profile_data:
+                self.master.after(0, self.profile_name_label.config, {"text": "Error"})
+                return
+
+            username = profile_data.get('username', 'N/A')
+            self.master.after(0, self.profile_name_label.config, {"text": username})
+
+            p_picture_url = profile_data.get('profile_picture_url')
+            if p_picture_url:
+                try:
+                    # Construct the full URL if a relative path is given
+                    if p_picture_url.startswith('/'):
+                        p_picture_url = f"{self.api.SERVER_URL}{p_picture_url}"
+
+                    response = requests.get(p_picture_url, stream=True)
+                    response.raise_for_status()
+                    image_data = response.content
+
+                    # Open the image and create a circular version
+                    img = Image.open(io.BytesIO(image_data))
+                    self.profile_photo = ImageTk.PhotoImage(create_circular_image(img, 32))
+
+                    self.master.after(0, self.profile_icon_label.config, {"image": self.profile_photo})
+
+                except (requests.RequestException, IOError) as e:
+                    print(f"Failed to load profile picture: {e}")
+                    self.master.after(0, self.profile_icon_label.config, {"text": "👤"}) # Fallback icon
+            else:
+                self.master.after(0, self.profile_icon_label.config, {"text": "👤"}) # Fallback icon
+
+        threading.Thread(target=update_task, daemon=True).start()
 
     def update_sidebar_state(self, is_running):
         new_state = "disabled" if is_running else "normal"
